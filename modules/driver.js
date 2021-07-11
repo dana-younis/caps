@@ -1,20 +1,20 @@
 'use strict';
 const events =require('../events')
-const faker = require('faker');
+
 
 require('./vendor');
 
 
-events.on('pickup', payload => {
+events.on('pick-up', payload => {
     setTimeout(() => {
       console.log(`DRIVER: picked up ${payload.orderID}`)
+      events.emit('in-transit', payload);
     }, 1000);
-    events.emit('in-transit', payload);
-  });
+  ;
   
-  events.on('in-transit', payload => {
-    setImmediate(()=>{
-        console.log(`DRIVER: delivered up Order#${payload.orderId}`)
-        events.emit('delivered', payload)
+
+  setTimeout(()=>{
+        console.log(`DRIVER: delivered up Order${payload.orderId}`)
+        events.emit('delivered', payload);
         },3000)
-  });
+})

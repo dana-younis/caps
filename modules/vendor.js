@@ -6,17 +6,17 @@ require('dotenv').config();
 
 const store = process.env.STORE;
 
-const myInterval =setInterval(() => {
-  let newOrder = {
-    storeName: store,
-    name: faker.name.findName(),
-    orderID: faker.datatype.uuid(),
-    address: faker.address.streetAddress()
-  };
-  events.emit('pick-uporder', newOrder);
-}, 4000);
+setInterval(() => {
+    const order={
+        storeName:store,
+        orderID: faker.datatype.uuid(),
+         customerName:faker.name.findName(),
+         address: faker.address.streetAddress()
+    }
+    events.emit('pick-up',order)
+}, 5000);
 
-events.on('delivered', payload => {
-  console.log(`Thank you for your order! Order number was ${payload.orderID}`);
-})
-module.exports = {myInterval}
+events.on('delivered',()=>{
+    console.log('Thank you!')
+});
+

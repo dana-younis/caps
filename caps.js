@@ -6,7 +6,7 @@ require('./modules/vendor');
 
 events.on('pick-up', (payload)=>{
     console.log('EVENT:', {
-        event: 'pickup',
+        event: 'pick-up',
         time:  faker.date.recent(),
         payload,
     });
